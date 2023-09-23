@@ -10,6 +10,7 @@ export const authOptions = {
       clientSecret: process.env.GOOGLE_FRONT_SECRET,
     }),
   ],
+  secret: process.env.SECRET,
   adapter: MongoDBAdapter(clientPromise),
 };
 
