@@ -21,6 +21,14 @@ const ColsWrapper = styled.div`
   margin: 40px 0;
   p{
     margin:5px;
+  } 
+  @media (max-width: 400px) {
+    grid-template-columns: 1fr; /* Change to a single column layout */
+    gap: 20px; /* Reduce the gap between items */
+    margin: 20px 0; /* Adjust margin as needed */
+    p {
+      margin: 5px;
+    }
   }
 `;
 
@@ -141,7 +149,7 @@ export default function AccountPage() {
                         {wishedProducts.length === 0 && (
                           <>
                             {session && (
-                              <p>Your wishlist is empty</p>
+                              <p>В избранные ничего не добавлено</p>
                             )}
                             {!session && (
                               <p>Авторизуйтесь чтобы добавлять в избранное</p>
@@ -200,7 +208,7 @@ export default function AccountPage() {
                       placeholder="Номер телефона"
                       value={phoneNumber}
                       name="phoneNumber"
-                      onChange={ev => setCountry(ev.target.value)} />
+                      onChange={ev => setPhoneNumber(ev.target.value)} />
                     <Button black block
                       onClick={saveAddress}>
                       Save
