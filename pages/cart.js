@@ -2,13 +2,13 @@ import Header from "@/components/Header";
 import styled from "styled-components";
 import Center from "@/components/Center";
 import Button from "@/components/Button";
-import {useContext, useEffect, useState} from "react";
-import {CartContext} from "@/components/CartContext";
+import { useContext, useEffect, useState } from "react";
+import { CartContext } from "@/components/CartContext";
 import axios from "axios";
 import Table from "@/components/Table";
 import Input from "@/components/Input";
-import {RevealWrapper} from "next-reveal";
-import {useSession} from "next-auth/react";
+import { RevealWrapper } from "next-reveal";
+import { useSession } from "next-auth/react";
 
 const ColumnsWrapper = styled.div`
   display: grid;
@@ -85,20 +85,21 @@ const CityHolder = styled.div`
 `;
 
 export default function CartPage() {
-  const {cartProducts,addProduct,removeProduct,clearCart} = useContext(CartContext);
-  const {data:session} = useSession();
-  const [products,setProducts] = useState([]);
-  const [name,setName] = useState('');
-  const [email,setEmail] = useState('');
-  const [city,setCity] = useState('');
-  const [postalCode,setPostalCode] = useState('');
-  const [streetAddress,setStreetAddress] = useState('');
-  const [country,setCountry] = useState('');
-  const [isSuccess,setIsSuccess] = useState(false);
+  const { cartProducts, addProduct, removeProduct, clearCart } = useContext(CartContext);
+  const { data: session } = useSession();
+  const [products, setProducts] = useState([]);
+  const [name, setName] = useState('')
+  const [email, setEmail] = useState('')
+  const [phoneNumber, setPhoneNumber] = useState('')
+  const [address, setAddress] = useState('')
+  const [zipCode, setZipCode] = useState('')
+  const [city, setCity] = useState('')
+  const [country, setCountry] = useState('')
+  const [isSuccess, setIsSuccess] = useState(false);
   const [shippingFee, setShippingFee] = useState(null);
   useEffect(() => {
     if (cartProducts.length > 0) {
-      axios.post('/api/cart', {ids:cartProducts})
+      axios.post('/api/cart', { ids: cartProducts })
         .then(response => {
           setProducts(response.data);
         })
@@ -139,7 +140,7 @@ export default function CartPage() {
   }
   async function goToPayment() {
     const response = await axios.post('/api/checkout', {
-      name,email,city,postalCode,streetAddress,country,
+      name, email, phoneNumber, address, zipCode, city, country,
       cartProducts,
     });
     if (response.data.url) {
@@ -159,8 +160,8 @@ export default function CartPage() {
         <Center>
           <ColumnsWrapper>
             <Box>
-              <h1>Thanks for your order!</h1>
-              <p>We will email you when your order will be sent.</p>
+              <h1>Спасибо за покупку!</h1>
+              <p>Мы сообщим вам как только ваш товар будет отправлен.</p>
             </Box>
           </ColumnsWrapper>
         </Center>
@@ -174,54 +175,54 @@ export default function CartPage() {
         <ColumnsWrapper>
           <RevealWrapper delay={0}>
             <Box>
-              <h2>Cart</h2>
+              <h2>Корзина</h2>
               {!cartProducts?.length && (
                 <div>Your cart is empty</div>
               )}
               {products?.length > 0 && (
                 <Table>
                   <thead>
-                  <tr>
-                    <th>Product</th>
-                    <th>Quantity</th>
-                    <th>Price</th>
-                  </tr>
+                    <tr>
+                      <th>Товар</th>
+                      <th>Количество</th>
+                      <th>Цена</th>
+                    </tr>
                   </thead>
                   <tbody>
-                  {products.map(product => (
-                    <tr key={product._id}>
-                      <ProductInfoCell>
-                        <ProductImageBox>
-                          <img src={product.images[0]} alt=""/>
-                        </ProductImageBox>
-                        {product.title}
-                      </ProductInfoCell>
-                      <td>
-                        <Button
-                          onClick={() => lessOfThisProduct(product._id)}>-</Button>
-                        <QuantityLabel>
-                          {cartProducts.filter(id => id === product._id).length}
-                        </QuantityLabel>
-                        <Button
-                          onClick={() => moreOfThisProduct(product._id)}>+</Button>
-                      </td>
-                      <td>
-                        ${cartProducts.filter(id => id === product._id).length * product.price}
-                      </td>
+                    {products.map(product => (
+                      <tr key={product._id}>
+                        <ProductInfoCell>
+                          <ProductImageBox>
+                            <img src={product.images[0]} alt="" />
+                          </ProductImageBox>
+                          {product.title}
+                        </ProductInfoCell>
+                        <td>
+                          <Button
+                            onClick={() => lessOfThisProduct(product._id)}>-</Button>
+                          <QuantityLabel>
+                            {cartProducts.filter(id => id === product._id).length}
+                          </QuantityLabel>
+                          <Button
+                            onClick={() => moreOfThisProduct(product._id)}>+</Button>
+                        </td>
+                        <td>
+                          {(cartProducts.filter(id => id === product._id).length * product.price).toLocaleString('ru')} тг
+                        </td>
+                      </tr>
+                    ))}
+                    <tr className="subtotal">
+                      <td colSpan={2}>Товары</td>
+                      <td>{productsTotal.toLocaleString('ru')} тг</td>
                     </tr>
-                  ))}
-                  <tr className="subtotal">
-                    <td colSpan={2}>Products</td>
-                    <td>${productsTotal}</td>
-                  </tr>
-                  <tr className="subtotal">
-                    <td colSpan={2}>Shipping</td>
-                    <td>${shippingFee}</td>
-                  </tr>
-                  <tr className="subtotal total">
-                    <td colSpan={2}>Total</td>
-                    <td>${productsTotal + parseInt(shippingFee || 0)}</td>
-                  </tr>
+                    <tr className="subtotal">
+                      <td colSpan={2}>Доставка</td>
+                      <td>{shippingFee?.toLocaleString('ru')} тг</td>
+                    </tr>
+                    <tr className="subtotal total">
+                      <td colSpan={2}>Итого</td>
+                      <td>{(productsTotal + parseInt(shippingFee || 0)).toLocaleString('ru')} тг</td>
+                    </tr>
                   </tbody>
                 </Table>
               )}
@@ -230,43 +231,40 @@ export default function CartPage() {
           {!!cartProducts?.length && (
             <RevealWrapper delay={100}>
               <Box>
-                <h2>Order information</h2>
-                <Input type="text"
-                       placeholder="Name"
-                       value={name}
-                       name="name"
-                       onChange={ev => setName(ev.target.value)} />
-                <Input type="text"
-                       placeholder="Email"
-                       value={email}
-                       name="email"
-                       onChange={ev => setEmail(ev.target.value)}/>
+                <h2>Заказ</h2>
+                <Input type="text" placeholder={'Имя'}
+                  value={name}
+                  name={"name"}
+                  onChange={e => setName(e.target.value)} />
+                <Input type="email" placeholder={'Электронная почта'}
+                  value={email}
+                  name={"email"}
+                  onChange={e => setEmail(e.target.value)} />
+                <Input type="text" placeholder={'Номер телефона'}
+                  value={phoneNumber}
+                  name={"phoneNumber"}
+                  onChange={e => setPhoneNumber(e.target.value)} />
+                <Input type="text" placeholder={'Адрес'}
+                  value={address}
+                  name="address"
+                  onChange={e => setAddress(e.target.value)} />
                 <CityHolder>
-                  <Input type="text"
-                         placeholder="City"
-                         value={city}
-                         name="city"
-                         onChange={ev => setCity(ev.target.value)}/>
-                  <Input type="text"
-                         placeholder="Postal Code"
-                         value={postalCode}
-                         name="postalCode"
-                         onChange={ev => setPostalCode(ev.target.value)}/>
+                  <Input type="text" placeholder={'Почтовый индекс'}
+                    value={zipCode}
+                    name={"zipCode"}
+                    onChange={e => setZipCode(e.target.value)} />
+                  <Input type="text" placeholder={'Город'}
+                    value={city}
+                    name={"city"}
+                    onChange={e => setCity(e.target.value)} />
                 </CityHolder>
-                <Input type="text"
-                       placeholder="Street Address"
-                       value={streetAddress}
-                       name="streetAddress"
-                       onChange={ev => setStreetAddress(ev.target.value)}/>
-                <Input type="text"
-                       placeholder="Country"
-                       value={country}
-                       name="country"
-                       onChange={ev => setCountry(ev.target.value)}/>
-                <Button black block
-                        onClick={goToPayment}>
-                  Continue to payment
-                </Button>
+                <Input type="text" placeholder={'Страна'}
+                  value={country}
+                  name={"country"}
+                  onChange={e => setCountry(e.target.value)} />
+                <Button black={'1'} block={'1'}
+                  onClick={goToPayment}
+                >Перейти к оплате</Button>
               </Box>
             </RevealWrapper>
           )}

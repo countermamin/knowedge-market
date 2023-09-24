@@ -1,15 +1,15 @@
-import {model, models, Schema} from "mongoose";
+import { model, models, Schema } from "mongoose";
 
 const OrderSchema = new Schema({
-  userEmail: String,
-  line_items:Object,
-  name:String,
-  email:String,
-  city:String,
-  postalCode:String,
-  streetAddress:String,
-  country:String,
-  paid:Boolean,
+  line_items: Object,
+  name: String,
+  city: String,
+  country: String,
+  phoneNumber: String,
+  address: String,
+  zipCode: String,
+  email: String,
+  paid: Boolean,
 }, {
   timestamps: true,
 });

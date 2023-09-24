@@ -1,13 +1,13 @@
 import Header from "@/components/Header";
 import Title from "@/components/Title";
 import Center from "@/components/Center";
-import {signIn, signOut, useSession} from "next-auth/react";
+import { signIn, signOut, useSession } from "next-auth/react";
 import Button from "@/components/Button";
 import styled from "styled-components";
 import WhiteBox from "@/components/WhiteBox";
-import {RevealWrapper} from "next-reveal";
+import { RevealWrapper } from "next-reveal";
 import Input from "@/components/Input";
-import {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import Spinner from "@/components/Spinner";
 import ProductBox from "@/components/ProductBox";
@@ -36,18 +36,18 @@ const WishedProductsGrid = styled.div`
 `;
 
 export default function AccountPage() {
-  const {data:session} = useSession();
-  const [name,setName] = useState('');
-  const [email,setEmail] = useState('');
-  const [city,setCity] = useState('');
-  const [postalCode,setPostalCode] = useState('');
-  const [streetAddress,setStreetAddress] = useState('');
-  const [country,setCountry] = useState('');
-  const [addressLoaded,setAddressLoaded] = useState(true);
-  const [wishlistLoaded,setWishlistLoaded] = useState(true);
-  const [orderLoaded,setOrderLoaded] = useState(true);
-  const [wishedProducts,setWishedProducts] = useState([]);
-  const [activeTab, setActiveTab] = useState('Orders');
+  const { data: session } = useSession();
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [city, setCity] = useState('');
+  const [postalCode, setPostalCode] = useState('');
+  const [streetAddress, setStreetAddress] = useState('');
+  const [country, setCountry] = useState('');
+  const [addressLoaded, setAddressLoaded] = useState(true);
+  const [wishlistLoaded, setWishlistLoaded] = useState(true);
+  const [orderLoaded, setOrderLoaded] = useState(true);
+  const [wishedProducts, setWishedProducts] = useState([]);
+  const [activeTab, setActiveTab] = useState('Заказы');
   const [orders, setOrders] = useState([]);
 
   async function logout() {
@@ -59,7 +59,7 @@ export default function AccountPage() {
     await signIn('google');
   }
   function saveAddress() {
-    const data = {name,email,city,streetAddress,postalCode,country};
+    const data = { name, email, city, streetAddress, postalCode, country };
     axios.put('/api/address', data);
   }
   useEffect(() => {
@@ -101,11 +101,11 @@ export default function AccountPage() {
             <RevealWrapper delay={0}>
               <WhiteBox>
                 <Tabs
-                  tabs={['Orders','Wishlist']}
+                  tabs={['Заказы', 'Избранное']}
                   active={activeTab}
                   onChange={setActiveTab}
                 />
-                {activeTab === 'Orders' && (
+                {activeTab === 'Заказы' && (
                   <>
                     {!orderLoaded && (
                       <Spinner fullWidth={true} />
@@ -113,7 +113,7 @@ export default function AccountPage() {
                     {orderLoaded && (
                       <div>
                         {orders.length === 0 && (
-                          <p>Login to see your orders</p>
+                          <p>Авторизуйтесь чтобы увидеть свои заказы</p>
                         )}
                         {orders.length > 0 && orders.map(o => (
                           <SingleOrder key={o._id} {...o} />
@@ -122,7 +122,7 @@ export default function AccountPage() {
                     )}
                   </>
                 )}
-                {activeTab === 'Wishlist' && (
+                {activeTab === 'Избранное' && (
                   <>
                     {!wishlistLoaded && (
                       <Spinner fullWidth={true} />
@@ -140,7 +140,7 @@ export default function AccountPage() {
                               <p>Your wishlist is empty</p>
                             )}
                             {!session && (
-                              <p>Login to add products to your wishlist</p>
+                              <p>Авторизуйтесь чтобы добавлять в избранное</p>
                             )}
                           </>
                         )}
@@ -154,56 +154,56 @@ export default function AccountPage() {
           <div>
             <RevealWrapper delay={100}>
               <WhiteBox>
-                <h2>{session ? 'Account details' : 'Login'}</h2>
+                <h2>{session ? 'Детали аккаунта' : 'Логин'}</h2>
                 {!addressLoaded && (
                   <Spinner fullWidth={true} />
                 )}
                 {addressLoaded && session && (
                   <>
                     <Input type="text"
-                           placeholder="Name"
-                           value={name}
-                           name="name"
-                           onChange={ev => setName(ev.target.value)} />
+                      placeholder="Name"
+                      value={name}
+                      name="name"
+                      onChange={ev => setName(ev.target.value)} />
                     <Input type="text"
-                           placeholder="Email"
-                           value={email}
-                           name="email"
-                           onChange={ev => setEmail(ev.target.value)}/>
+                      placeholder="Email"
+                      value={email}
+                      name="email"
+                      onChange={ev => setEmail(ev.target.value)} />
                     <CityHolder>
                       <Input type="text"
-                             placeholder="City"
-                             value={city}
-                             name="city"
-                             onChange={ev => setCity(ev.target.value)}/>
+                        placeholder="City"
+                        value={city}
+                        name="city"
+                        onChange={ev => setCity(ev.target.value)} />
                       <Input type="text"
-                             placeholder="Postal Code"
-                             value={postalCode}
-                             name="postalCode"
-                             onChange={ev => setPostalCode(ev.target.value)}/>
+                        placeholder="Postal Code"
+                        value={postalCode}
+                        name="postalCode"
+                        onChange={ev => setPostalCode(ev.target.value)} />
                     </CityHolder>
                     <Input type="text"
-                           placeholder="Street Address"
-                           value={streetAddress}
-                           name="streetAddress"
-                           onChange={ev => setStreetAddress(ev.target.value)}/>
+                      placeholder="Street Address"
+                      value={streetAddress}
+                      name="streetAddress"
+                      onChange={ev => setStreetAddress(ev.target.value)} />
                     <Input type="text"
-                           placeholder="Country"
-                           value={country}
-                           name="country"
-                           onChange={ev => setCountry(ev.target.value)}/>
+                      placeholder="Country"
+                      value={country}
+                      name="country"
+                      onChange={ev => setCountry(ev.target.value)} />
                     <Button black block
-                            onClick={saveAddress}>
+                      onClick={saveAddress}>
                       Save
                     </Button>
-                    <hr/>
+                    <hr />
                   </>
                 )}
                 {session && (
-                  <Button primary onClick={logout}>Logout</Button>
+                  <Button primary onClick={logout}>Выйти</Button>
                 )}
                 {!session && (
-                  <Button primary onClick={login}>Login with Google</Button>
+                  <Button primary onClick={login}>Войти через Google</Button>
                 )}
               </WhiteBox>
             </RevealWrapper>

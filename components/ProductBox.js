@@ -1,14 +1,15 @@
 import styled from "styled-components";
-import Button, {ButtonStyle} from "@/components/Button";
+import Button, { ButtonStyle } from "@/components/Button";
 import CartIcon from "@/components/icons/CartIcon";
 import Link from "next/link";
-import {useContext, useEffect, useState} from "react";
-import {CartContext} from "@/components/CartContext";
-import {primary} from "@/lib/colors";
+import { useContext, useEffect, useState } from "react";
+import { CartContext } from "@/components/CartContext";
+import { primary } from "@/lib/colors";
 import FlyingButton from "@/components/FlyingButton";
 import HeartOutlineIcon from "@/components/icons/HeartOutlineIcon";
 import HeartSolidIcon from "@/components/icons/HeartSolidIcon";
 import axios from "axios";
+import { useSession } from "next-auth/react";
 
 const ProductWrapper = styled.div`
   button{
@@ -89,22 +90,27 @@ const WishlistButton = styled.button`
 `;
 
 export default function ProductBox({
-  _id,title,description,price,images,wished=false,
-  onRemoveFromWishlist=()=>{},
+  _id, title, description, price, images, wished = false,
+  onRemoveFromWishlist = () => { },
 }) {
-  const url = '/product/'+_id;
-  const [isWished,setIsWished] = useState(wished);
+  const { data: session } = useSession();
+  const url = '/product/' + _id;
+  const [isWished, setIsWished] = useState(wished);
   function addToWishlist(ev) {
     ev.preventDefault();
     ev.stopPropagation();
-    const nextValue = !isWished;
-    if (nextValue === false && onRemoveFromWishlist) {
-      onRemoveFromWishlist(_id);
+    if (session) {
+      const nextValue = !isWished;
+      if (nextValue === false && onRemoveFromWishlist) {
+        onRemoveFromWishlist(_id);
+      }
+      axios.post('/api/wishlist', {
+        product: _id,
+      }).then(() => { });
+      setIsWished(nextValue);
+    } else {
+      alert('Требуется авторизация');
     }
-    axios.post('/api/wishlist', {
-      product: _id,
-    }).then(() => {});
-    setIsWished(nextValue);
   }
   return (
     <ProductWrapper>
@@ -113,16 +119,16 @@ export default function ProductBox({
           <WishlistButton wished={isWished} onClick={addToWishlist}>
             {isWished ? <HeartSolidIcon /> : <HeartOutlineIcon />}
           </WishlistButton>
-          <img src={images?.[0]} alt=""/>
+          <img src={images?.[0]} alt="" />
         </div>
       </WhiteBox>
       <ProductInfoBox>
         <Title href={url}>{title}</Title>
         <PriceRow>
           <Price>
-            ${price}
+            {price.toLocaleString('ru')} тг
           </Price>
-          <FlyingButton _id={_id} src={images?.[0]}>Add to cart</FlyingButton>
+          <FlyingButton _id={_id} src={images?.[0]}><CartIcon /></FlyingButton>
         </PriceRow>
       </ProductInfoBox>
     </ProductWrapper>
