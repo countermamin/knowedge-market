@@ -14,6 +14,7 @@ const FooterInfo = styled.ul`
   padding: 0;
   display: flex;
   justify-content: space-between;
+  margin-bottom: 0;
 `;
 
 const FooterLink = styled.li`
