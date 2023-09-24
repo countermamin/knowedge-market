@@ -33,22 +33,22 @@ const StyledText = styled.p`
 `;
 
 const AdaptiveFooter = () => {
-    return (
-        <FooterContainer>
-            <Center>
-                <FooterInfo>
-                    <div>
-                        <h4>Контактная информация</h4>
-                        <StyledText>+7 777 777 77 77</StyledText>
-                        <StyledText>orzu.maminov9@gmail.com</StyledText>
-                    </div>
-                    <div>
-                        <h4>© 2023 Все права защищены</h4>
-                    </div>
-                </FooterInfo>
-            </Center>
-        </FooterContainer>
-    );
+  return (
+    <FooterContainer>
+      <Center>
+        <FooterInfo>
+          <div>
+            <h4>Контактная информация</h4>
+            <StyledText>+7 777 777 77 77</StyledText>
+            <StyledText>orzu.maminov9@gmail.com</StyledText>
+          </div>
+          <div>
+            <h4>© 2023 Все права защищены</h4>
+          </div>
+        </FooterInfo>
+      </Center>
+    </FooterContainer>
+  );
 };
 
 export default AdaptiveFooter;

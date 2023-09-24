@@ -9,6 +9,7 @@ import ProductImages from "@/components/ProductImages";
 import CartIcon from "@/components/icons/CartIcon";
 import FlyingButton from "@/components/FlyingButton";
 import ProductReviews from "@/components/ProductReviews";
+import AdaptiveFooter from "@/components/Footer";
 
 const ColWrapper = styled.div`
   display: grid;
@@ -54,6 +55,7 @@ export default function ProductPage({ product }) {
         </ColWrapper>
         <ProductReviews product={product} />
       </Center>
+      <AdaptiveFooter />
     </>
   );
 }
