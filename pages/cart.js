@@ -9,6 +9,7 @@ import Table from "@/components/Table";
 import Input from "@/components/Input";
 import { RevealWrapper } from "next-reveal";
 import { useSession } from "next-auth/react";
+import AdaptiveFooter from "@/components/Footer";
 
 const ColumnsWrapper = styled.div`
   display: grid;
@@ -270,6 +271,7 @@ export default function CartPage() {
           )}
         </ColumnsWrapper>
       </Center>
+      <AdaptiveFooter />
     </>
   );
 }
