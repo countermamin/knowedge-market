@@ -4,7 +4,7 @@ import WhiteBox from "@/components/WhiteBox";
 import StarsRating from "@/components/StarsRating";
 import Textarea from "@/components/Textarea";
 import Button from "@/components/Button";
-import {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import Spinner from "@/components/Spinner";
 
@@ -52,14 +52,14 @@ const ReviewHeader = styled.div`
   }
 `;
 
-export default function ProductReviews({product}) {
-  const [title,setTitle] = useState('');
-  const [description,setDescription] = useState('');
-  const [stars,setStars] = useState(0);
-  const [reviews,setReviews] = useState([]);
-  const [reviewsLoading,setReviewsLoading] = useState(false);
+export default function ProductReviews({ product }) {
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
+  const [stars, setStars] = useState(0);
+  const [reviews, setReviews] = useState([]);
+  const [reviewsLoading, setReviewsLoading] = useState(false);
   function submitReview() {
-    const data = {title,description,stars,product:product._id};
+    const data = { title, description, stars, product: product._id };
     axios.post('/api/reviews', data).then(res => {
       setTitle('');
       setDescription('');
@@ -72,42 +72,42 @@ export default function ProductReviews({product}) {
   }, []);
   function loadReviews() {
     setReviewsLoading(true);
-    axios.get('/api/reviews?product='+product._id).then(res => {
+    axios.get('/api/reviews?product=' + product._id).then(res => {
       setReviews(res.data);
       setReviewsLoading(false);
     });
   }
   return (
     <div>
-      <Title>Reviews</Title>
+      <Title>Отзывы</Title>
       <ColsWrapper>
         <div>
           <WhiteBox>
-            <Subtitle>Add a review</Subtitle>
+            <Subtitle>Добавить отзыв</Subtitle>
             <div>
               <StarsRating onChange={setStars} />
             </div>
             <Input
               value={title}
               onChange={ev => setTitle(ev.target.value)}
-              placeholder="Title" />
+              placeholder="Заголовок" />
             <Textarea
               value={description}
               onChange={ev => setDescription(ev.target.value)}
-              placeholder="Was it good? Pros? Cons?" />
+              placeholder="Опишите преимущества и недостатки" />
             <div>
-              <Button primary onClick={submitReview}>Submit your review</Button>
+              <Button primary onClick={submitReview}>Опубликовать отзыв</Button>
             </div>
           </WhiteBox>
         </div>
         <div>
           <WhiteBox>
-            <Subtitle>All reviews</Subtitle>
+            <Subtitle>Все отзывы</Subtitle>
             {reviewsLoading && (
               <Spinner fullWidth={true} />
             )}
             {reviews.length === 0 && (
-              <p>No reviews :(</p>
+              <p>Отзывы отсутсвуют :(</p>
             )}
             {reviews.length > 0 && reviews.map(review => (
               <ReviewWrapper key={review._id}>

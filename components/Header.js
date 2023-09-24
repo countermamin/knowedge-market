@@ -92,11 +92,11 @@ export default function Header() {
         <Wrapper>
           <Logo href={'/'}>Ecommerce</Logo>
           <StyledNav mobileNavActive={mobileNavActive}>
-            <NavLink href={'/'}>Home</NavLink>
-            <NavLink href={'/products'}>All products</NavLink>
-            <NavLink href={'/categories'}>Categories</NavLink>
-            <NavLink href={'/account'}>Account</NavLink>
-            <NavLink href={'/cart'}>Cart ({cartProducts.length})</NavLink>
+            <NavLink href={'/'}>Главная</NavLink>
+            <NavLink href={'/products'}>Товары</NavLink>
+            <NavLink href={'/categories'}>Категории</NavLink>
+            <NavLink href={'/account'}>Аккаунт</NavLink>
+            <NavLink href={'/cart'}>Корзина ({cartProducts.length})</NavLink>
           </StyledNav>
           <SideIcons>
             <Link href={'/search'}><SearchIcon /></Link>

@@ -1,8 +1,8 @@
 import Center from "@/components/Center";
 import Header from "@/components/Header";
 import Title from "@/components/Title";
-import {mongooseConnect} from "@/lib/mongoose";
-import {Product} from "@/models/Product";
+import { mongooseConnect } from "@/lib/mongoose";
+import { Product } from "@/models/Product";
 import styled from "styled-components";
 import WhiteBox from "@/components/WhiteBox";
 import ProductImages from "@/components/ProductImages";
@@ -28,7 +28,7 @@ const Price = styled.span`
   font-size: 1.4rem;
 `;
 
-export default function ProductPage({product}) {
+export default function ProductPage({ product }) {
   return (
     <>
       <Header />
@@ -42,11 +42,11 @@ export default function ProductPage({product}) {
             <p>{product.description}</p>
             <PriceRow>
               <div>
-                <Price>${product.price}</Price>
+                <Price>{product.price.toLocaleString('ru')} тг</Price>
               </div>
               <div>
                 <FlyingButton main _id={product._id} src={product.images?.[0]}>
-                  <CartIcon />Add to cart
+                  <CartIcon />Добавить в корзину
                 </FlyingButton>
               </div>
             </PriceRow>
@@ -60,7 +60,7 @@ export default function ProductPage({product}) {
 
 export async function getServerSideProps(context) {
   await mongooseConnect();
-  const {id} = context.query;
+  const { id } = context.query;
   const product = await Product.findById(id);
   return {
     props: {
