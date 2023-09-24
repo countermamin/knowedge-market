@@ -37,12 +37,13 @@ const WishedProductsGrid = styled.div`
 
 export default function AccountPage() {
   const { data: session } = useSession();
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [city, setCity] = useState('');
-  const [postalCode, setPostalCode] = useState('');
-  const [streetAddress, setStreetAddress] = useState('');
-  const [country, setCountry] = useState('');
+  const [name, setName] = useState('')
+  const [email, setEmail] = useState('')
+  const [phoneNumber, setPhoneNumber] = useState('')
+  const [address, setAddress] = useState('')
+  const [zipCode, setZipCode] = useState('')
+  const [city, setCity] = useState('')
+  const [country, setCountry] = useState('')
   const [addressLoaded, setAddressLoaded] = useState(true);
   const [wishlistLoaded, setWishlistLoaded] = useState(true);
   const [orderLoaded, setOrderLoaded] = useState(true);
@@ -59,7 +60,9 @@ export default function AccountPage() {
     await signIn('google');
   }
   function saveAddress() {
-    const data = { name, email, city, streetAddress, postalCode, country };
+    const data = {
+      name, email, phoneNumber, address, zipCode, city, country
+    };
     axios.put('/api/address', data);
   }
   useEffect(() => {
@@ -73,9 +76,10 @@ export default function AccountPage() {
       setName(response.data.name);
       setEmail(response.data.email);
       setCity(response.data.city);
-      setPostalCode(response.data.postalCode);
-      setStreetAddress(response.data.streetAddress);
+      setZipCode(response.data.zipCode);
+      setAddress(response.data.address);
       setCountry(response.data.country);
+      setPhoneNumber(response.data.phoneNumber);
       setAddressLoaded(true);
     });
     axios.get('/api/wishlist').then(response => {
@@ -161,36 +165,41 @@ export default function AccountPage() {
                 {addressLoaded && session && (
                   <>
                     <Input type="text"
-                      placeholder="Name"
+                      placeholder="Имя"
                       value={name}
                       name="name"
                       onChange={ev => setName(ev.target.value)} />
                     <Input type="text"
-                      placeholder="Email"
+                      placeholder="Почта"
                       value={email}
                       name="email"
                       onChange={ev => setEmail(ev.target.value)} />
                     <CityHolder>
                       <Input type="text"
-                        placeholder="City"
+                        placeholder="Город"
                         value={city}
                         name="city"
                         onChange={ev => setCity(ev.target.value)} />
                       <Input type="text"
-                        placeholder="Postal Code"
-                        value={postalCode}
+                        placeholder="Почтовый индекс"
+                        value={zipCode}
                         name="postalCode"
                         onChange={ev => setPostalCode(ev.target.value)} />
                     </CityHolder>
                     <Input type="text"
-                      placeholder="Street Address"
-                      value={streetAddress}
-                      name="streetAddress"
+                      placeholder="Адрес"
+                      value={address}
+                      name="address"
                       onChange={ev => setStreetAddress(ev.target.value)} />
                     <Input type="text"
-                      placeholder="Country"
+                      placeholder="Страна"
                       value={country}
                       name="country"
+                      onChange={ev => setCountry(ev.target.value)} />
+                    <Input type="text"
+                      placeholder="Номер телефона"
+                      value={phoneNumber}
+                      name="phoneNumber"
                       onChange={ev => setCountry(ev.target.value)} />
                     <Button black block
                       onClick={saveAddress}>
