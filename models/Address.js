@@ -1,12 +1,13 @@
-import mongoose, {model, models, Schema} from "mongoose";
+import mongoose, { model, models, Schema } from "mongoose";
 
 const AddressSchema = new Schema({
-  userEmail: {type:String, unique:true, required:true},
+  userEmail: { type: String, unique: true, required: true },
   name: String,
   email: String,
+  phoneNumber: Number,
+  address: String,
+  zipCode: String,
   city: String,
-  postalCode: String,
-  streetAddress: String,
   country: String,
 });
 
