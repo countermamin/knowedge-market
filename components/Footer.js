@@ -7,6 +7,12 @@ const FooterContainer = styled.footer`
   background-color: #000;
   color: #fff;
   margin-top: 26px;
+  ${props => props.bottom && `
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+  `
+  }
 `;
 
 const FooterInfo = styled.ul`
@@ -14,6 +20,8 @@ const FooterInfo = styled.ul`
   padding: 0;
   display: flex;
   justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
   margin-bottom: 0;
 `;
 
@@ -33,9 +41,9 @@ const StyledText = styled.p`
   }
 `;
 
-const AdaptiveFooter = () => {
+const AdaptiveFooter = (props) => {
   return (
-    <FooterContainer>
+    <FooterContainer bottom={props.bottom}>
       <Center>
         <FooterInfo>
           <div>

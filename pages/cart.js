@@ -178,7 +178,7 @@ export default function CartPage() {
             <Box>
               <h2>Корзина</h2>
               {!cartProducts?.length && (
-                <div>Your cart is empty</div>
+                <div>Ваша козина пустая</div>
               )}
               {products?.length > 0 && (
                 <Table>
@@ -241,7 +241,7 @@ export default function CartPage() {
                   value={email}
                   name={"email"}
                   onChange={e => setEmail(e.target.value)} />
-                <Input type="text" placeholder={'Номер телефона'}
+                <Input type="number" placeholder={'Номер телефона'}
                   value={phoneNumber}
                   name={"phoneNumber"}
                   onChange={e => setPhoneNumber(e.target.value)} />
@@ -271,7 +271,14 @@ export default function CartPage() {
           )}
         </ColumnsWrapper>
       </Center>
-      <AdaptiveFooter />
+      {!cartProducts?.length ? (
+        <AdaptiveFooter bottom={1} />
+      ) :
+        (
+          <AdaptiveFooter />
+        )
+      }
+
     </>
   );
 }

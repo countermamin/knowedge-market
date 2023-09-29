@@ -13,6 +13,7 @@ import Spinner from "@/components/Spinner";
 import ProductBox from "@/components/ProductBox";
 import Tabs from "@/components/Tabs";
 import SingleOrder from "@/components/SingleOrder";
+import AdaptiveFooter from "@/components/Footer";
 
 const ColsWrapper = styled.div`
   display:grid;
@@ -22,7 +23,7 @@ const ColsWrapper = styled.div`
   p{
     margin:5px;
   } 
-  @media (max-width: 400px) {
+  @media (max-width: 680px) {
     grid-template-columns: 1fr; /* Change to a single column layout */
     gap: 20px; /* Reduce the gap between items */
     margin: 20px 0; /* Adjust margin as needed */
@@ -41,6 +42,14 @@ const WishedProductsGrid = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 40px;
+`;
+
+const WrapperForAll = styled.div`
+  overflow-y: auto; /* Добавление вертикальной прокрутки по мере необходимости */
+  max-height: calc(100vh - (70px + 146px));
+  @media (max-width: 476px) {
+    max-height: calc(100vh - (70px + 220px));
+  }
 `;
 
 export default function AccountPage() {
@@ -107,126 +116,123 @@ export default function AccountPage() {
   return (
     <>
       <Header />
-      <Center>
-        <ColsWrapper>
-          <div>
-            <RevealWrapper delay={0}>
-              <WhiteBox>
-                <Tabs
-                  tabs={['Заказы', 'Избранное']}
-                  active={activeTab}
-                  onChange={setActiveTab}
-                />
-                {activeTab === 'Заказы' && (
-                  <>
-                    {!orderLoaded && (
-                      <Spinner fullWidth={true} />
-                    )}
-                    {orderLoaded && (
-                      <div>
-                        {orders.length === 0 && (
-                          <p>Авторизуйтесь чтобы увидеть свои заказы</p>
-                        )}
-                        {orders.length > 0 && orders.map(o => (
-                          <SingleOrder key={o._id} {...o} />
-                        ))}
-                      </div>
-                    )}
-                  </>
-                )}
-                {activeTab === 'Избранное' && (
-                  <>
-                    {!wishlistLoaded && (
-                      <Spinner fullWidth={true} />
-                    )}
-                    {wishlistLoaded && (
-                      <>
-                        <WishedProductsGrid>
-                          {wishedProducts.length > 0 && wishedProducts.map(wp => (
-                            <ProductBox key={wp._id} {...wp} wished={true} onRemoveFromWishlist={productRemovedFromWishlist} />
+      <WrapperForAll>
+        <Center>
+          <ColsWrapper>
+            <div>
+              <RevealWrapper delay={0}>
+                <WhiteBox>
+                  <Tabs
+                    tabs={['Заказы', 'Избранное']}
+                    active={activeTab}
+                    onChange={setActiveTab}
+                  />
+                  {activeTab === 'Заказы' && (
+                    <>
+                      {!orderLoaded && (
+                        <Spinner fullWidth={true} />
+                      )}
+                      {orderLoaded && (
+                        <div>
+                          {orders.length === 0 && (
+                            <p>Авторизуйтесь чтобы увидеть свои заказы</p>
+                          )}
+                          {orders.length > 0 && orders.map(o => (
+                            <SingleOrder key={o._id} {...o} />
                           ))}
-                        </WishedProductsGrid>
-                        {wishedProducts.length === 0 && (
-                          <>
-                            {session && (
-                              <p>В избранные ничего не добавлено</p>
-                            )}
-                            {!session && (
-                              <p>Авторизуйтесь чтобы добавлять в избранное</p>
-                            )}
-                          </>
-                        )}
-                      </>
-                    )}
-                  </>
-                )}
-              </WhiteBox>
-            </RevealWrapper>
-          </div>
-          <div>
-            <RevealWrapper delay={100}>
-              <WhiteBox>
-                <h2>{session ? 'Детали аккаунта' : 'Логин'}</h2>
-                {!addressLoaded && (
-                  <Spinner fullWidth={true} />
-                )}
-                {addressLoaded && session && (
-                  <>
-                    <Input type="text"
-                      placeholder="Имя"
-                      value={name}
-                      name="name"
-                      onChange={ev => setName(ev.target.value)} />
-                    <Input type="text"
-                      placeholder="Почта"
-                      value={email}
-                      name="email"
-                      onChange={ev => setEmail(ev.target.value)} />
-                    <CityHolder>
-                      <Input type="text"
-                        placeholder="Город"
-                        value={city}
-                        name="city"
-                        onChange={ev => setCity(ev.target.value)} />
-                      <Input type="text"
-                        placeholder="Почтовый индекс"
-                        value={zipCode}
-                        name="postalCode"
-                        onChange={ev => setPostalCode(ev.target.value)} />
-                    </CityHolder>
-                    <Input type="text"
-                      placeholder="Адрес"
-                      value={address}
-                      name="address"
-                      onChange={ev => setStreetAddress(ev.target.value)} />
-                    <Input type="text"
-                      placeholder="Страна"
-                      value={country}
-                      name="country"
-                      onChange={ev => setCountry(ev.target.value)} />
-                    <Input type="text"
-                      placeholder="Номер телефона"
-                      value={phoneNumber}
-                      name="phoneNumber"
-                      onChange={ev => setPhoneNumber(ev.target.value)} />
-                    <Button black block
-                      onClick={saveAddress}>
-                      Save
-                    </Button>
-                    <hr />
-                  </>
-                )}
-                {session && (
-                  <Button primary onClick={logout}>Выйти</Button>
-                )}
-                {!session && (
-                  <Button primary onClick={login}>Войти через Google</Button>
-                )}
-              </WhiteBox>
-            </RevealWrapper>
-          </div>
-        </ColsWrapper>
-      </Center>
+                        </div>
+                      )}
+                    </>
+                  )}
+                  {activeTab === 'Избранное' && (
+                    <>
+                      {!wishlistLoaded && (
+                        <Spinner fullWidth={true} />
+                      )}
+                      {wishlistLoaded && (
+                        <>
+                          <WishedProductsGrid>
+                            {wishedProducts.length > 0 && wishedProducts.map(wp => (
+                              <ProductBox key={wp._id} {...wp} wished={true} onRemoveFromWishlist={productRemovedFromWishlist} />
+                            ))}
+                          </WishedProductsGrid>
+                          {wishedProducts.length === 0 && (
+                            <>
+                              {session && (
+                                <p>В избранные ничего не добавлено</p>
+                              )}
+                              {!session && (
+                                <p>Авторизуйтесь чтобы добавлять в избранное</p>
+                              )}
+                            </>
+                          )}
+                        </>
+                      )}
+                    </>
+                  )}
+                </WhiteBox>
+              </RevealWrapper>
+            </div>
+            <div>
+              <RevealWrapper delay={100}>
+                {/* ДЕТАЛИ АККАУНТА */}
+                <WhiteBox>
+                  <h2>{session ? 'Детали аккаунта' : 'Логин'}</h2>
+                  {!addressLoaded && (
+                    <Spinner fullWidth={true} />
+                  )}
+                  {addressLoaded && session && (
+                    <>
+                      <Input type="text" placeholder={'Имя'}
+                        value={name}
+                        name={"name"}
+                        onChange={e => setName(e.target.value)} />
+                      <Input type="email" placeholder={'Электронная почта'}
+                        value={email}
+                        name={"email"}
+                        onChange={e => setEmail(e.target.value)} />
+                      <Input type="number" placeholder={'Номер телефона'}
+                        value={phoneNumber}
+                        name={"phoneNumber"}
+                        onChange={e => setPhoneNumber(e.target.value)} />
+                      <Input type="text" placeholder={'Адрес'}
+                        value={address}
+                        name="address"
+                        onChange={e => setAddress(e.target.value)} />
+                      <CityHolder>
+                        <Input type="text" placeholder={'Почтовый индекс'}
+                          value={zipCode}
+                          name={"zipCode"}
+                          onChange={e => setZipCode(e.target.value)} />
+                        <Input type="text" placeholder={'Город'}
+                          value={city}
+                          name={"city"}
+                          onChange={e => setCity(e.target.value)} />
+                      </CityHolder>
+                      <Input type="text" placeholder={'Страна'}
+                        value={country}
+                        name={"country"}
+                        onChange={e => setCountry(e.target.value)} />
+                      <Button black block
+                        onClick={saveAddress}>
+                        Сохранить
+                      </Button>
+                      <hr />
+                    </>
+                  )}
+                  {session && (
+                    <Button primary onClick={logout}>Выйти</Button>
+                  )}
+                  {!session && (
+                    <Button primary onClick={login}>Войти через Google</Button>
+                  )}
+                </WhiteBox>
+              </RevealWrapper>
+            </div>
+          </ColsWrapper>
+        </Center>
+      </WrapperForAll>
+      <AdaptiveFooter bottom={1} />
     </>
   );
 }

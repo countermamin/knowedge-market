@@ -1,8 +1,8 @@
 import Link from "next/link";
 import styled from "styled-components";
 import Center from "@/components/Center";
-import {useContext, useState} from "react";
-import {CartContext} from "@/components/CartContext";
+import { useContext, useState } from "react";
+import { CartContext } from "@/components/CartContext";
 import BarsIcon from "@/components/icons/Bars";
 import SearchIcon from "@/components/icons/SearchIcon";
 
@@ -84,8 +84,8 @@ const SideIcons = styled.div`
 `;
 
 export default function Header() {
-  const {cartProducts} = useContext(CartContext);
-  const [mobileNavActive,setMobileNavActive] = useState(false);
+  const { cartProducts } = useContext(CartContext);
+  const [mobileNavActive, setMobileNavActive] = useState(false);
   return (
     <StyledHeader>
       <Center>

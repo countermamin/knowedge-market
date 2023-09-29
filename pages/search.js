@@ -66,7 +66,6 @@ export default function SearchPage() {
           <ProductsGrid products={products} />
         )}
       </Center>
-      <AdaptiveFooter />
     </>
   );
 }
