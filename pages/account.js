@@ -90,18 +90,14 @@ export default function AccountPage() {
     setWishlistLoaded(false);
     setOrderLoaded(false);
     axios.get('/api/address').then(response => {
-      if (response.data.length === 0) {
-        return setAddressLoaded(true);
-      } else {
-        setName(response.data.name);
-        setEmail(response.data.email);
-        setCity(response.data.city);
-        setZipCode(response.data.zipCode);
-        setAddress(response.data.address);
-        setCountry(response.data.country);
-        setPhoneNumber(response.data.phoneNumber);
-        setAddressLoaded(true);
-      }
+      setName(response.data.name);
+      setEmail(response.data.email);
+      setCity(response.data.city);
+      setZipCode(response.data.zipCode);
+      setAddress(response.data.address);
+      setCountry(response.data.country);
+      setPhoneNumber(response.data.phoneNumber);
+      setAddressLoaded(true);
     });
     axios.get('/api/wishlist').then(response => {
       setWishedProducts(response.data.map(wp => wp.product));
