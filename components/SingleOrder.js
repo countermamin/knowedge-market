@@ -24,16 +24,16 @@ const Address = styled.div`
   color:#888;
 `;
 
-export default function SingleOrder({line_items,createdAt,...rest}) {
+export default function SingleOrder({ line_items, createdAt, ...rest }) {
   return (
     <StyledOrder>
       <div>
-        <time>{(new Date(createdAt)).toLocaleString('sv-SE')}</time>
+        <time>{(new Date(createdAt)).toLocaleString('ru-Ru')}</time>
         <Address>
           {rest.name}<br />
           {rest.email}<br />
-          {rest.streetAddress}<br />
-          {rest.postalCode} {rest.city}, {rest.country}
+          {rest.address}<br />
+          {rest.zipCode} {rest.city}, {rest.country}
         </Address>
       </div>
       <div>
