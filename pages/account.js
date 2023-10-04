@@ -134,7 +134,10 @@ export default function AccountPage() {
                       )}
                       {orderLoaded && (
                         <div>
-                          {orders.length === 0 && (
+                          {orders.length === 0 && session && (
+                            <p>У вас пока нету заказов</p>
+                          )}
+                          {orders.length === 0 && !session && (
                             <p>Авторизуйтесь чтобы увидеть свои заказы</p>
                           )}
                           {orders.length > 0 && orders.map(o => (
