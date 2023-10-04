@@ -128,9 +128,10 @@ export default function CartPage() {
       setName(response.data.name);
       setEmail(response.data.email);
       setCity(response.data.city);
-      setPostalCode(response.data.postalCode);
-      setStreetAddress(response.data.streetAddress);
+      setZipCode(response.data.zipCode);
+      setAddress(response.data.address);
       setCountry(response.data.country);
+      setPhoneNumber(response.data.phoneNumber);
     });
   }, [session]);
   function moreOfThisProduct(id) {
