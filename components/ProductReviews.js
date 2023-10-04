@@ -113,7 +113,7 @@ export default function ProductReviews({ product }) {
               <ReviewWrapper key={review._id}>
                 <ReviewHeader>
                   <StarsRating size={'sm'} disabled={true} defaultHowMany={review.stars} />
-                  <time>{(new Date(review.createdAt)).toLocaleString('sv-SE')}</time>
+                  <time>{(new Date(review.createdAt)).toLocaleString('ru-Ru')}</time>
                 </ReviewHeader>
                 <h3>{review.title}</h3>
                 <p>{review.description}</p>
