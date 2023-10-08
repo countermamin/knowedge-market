@@ -91,7 +91,7 @@ export default function AccountPage() {
     setOrderLoaded(false);
     axios.get('/api/address').then(response => {
       if (response.data === null) {
-        setOrderLoaded(true);
+        setAddressLoaded(true);
       } else {
         setName(response.data.name);
         setEmail(response.data.email);
