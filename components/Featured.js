@@ -3,7 +3,7 @@ import styled from "styled-components";
 import ButtonLink from "@/components/ButtonLink";
 import CartIcon from "@/components/icons/CartIcon";
 import FlyingButton from "@/components/FlyingButton";
-import {RevealWrapper} from 'next-reveal'
+import {RevealWrapper} from 'next-reveal';
 
 const Bg = styled.div`
   background-color: #222;
@@ -97,7 +97,7 @@ export default function Featured({product}) {
           <ImgColumn>
             <RevealWrapper delay={0}>
               <CenterImg>
-                <img className={'main'} src={product.images?.[0]} alt=""/>
+                <img className={'main'} src={product.images?.[0]} alt="img"/>
               </CenterImg>
             </RevealWrapper>
           </ImgColumn>

@@ -44,7 +44,7 @@ export default function ProductImages({images}) {
             key={image}
             active={image===activeImage}
             onClick={() => setActiveImage(image)}>
-            <Image src={image} alt=""/>
+            <Image src={image} alt="img"/>
           </ImageButton>
         ))}
       </ImageButtons>
