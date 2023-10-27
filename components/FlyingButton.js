@@ -95,7 +95,7 @@ export default function FlyingButton(props) {
         white={props.white}
         main={props.main}
         onClick={() => addProduct(props._id)}>
-        <img src={props.src} alt="" ref={imgRef} />
+        <img src={props.src} alt="img" ref={imgRef} />
         <button onClick={ev => sendImageToCart(ev)} {...props} />
       </FlyingButtonWrapper>
     </>
