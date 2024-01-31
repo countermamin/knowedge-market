@@ -5,6 +5,7 @@ import { useContext, useState } from "react";
 import { CartContext } from "@/components/CartContext";
 import BarsIcon from "@/components/icons/Bars";
 import SearchIcon from "@/components/icons/SearchIcon";
+import { useRouter } from "next/router";
 
 const StyledHeader = styled.header`
   background-color: #222;
@@ -45,15 +46,19 @@ const StyledNav = styled.nav`
 `;
 const NavLink = styled(Link)`
   display: block;
-  color:#aaa;
+  color: ${props => props.isActive ? '#0D3D29' : '#aaa'};
   text-decoration:none;
   min-width:30px;
   padding: 10px 0;
+  transition: all .5s ease;
   svg{
     height:20px;
   }
   @media screen and (min-width: 768px) {
     padding:0;
+  }
+  &:hover {
+    color: #0D3D29;
   }
 `;
 const NavButton = styled.button`
@@ -86,20 +91,21 @@ const SideIcons = styled.div`
 export default function Header() {
   const { cartProducts } = useContext(CartContext);
   const [mobileNavActive, setMobileNavActive] = useState(false);
+  const router = useRouter();
   return (
     <StyledHeader>
       <Center>
         <Wrapper>
           <Logo href={'/'}>Ecommerce</Logo>
           <StyledNav mobileNavActive={mobileNavActive}>
-            <NavLink href={'/'}>Главная</NavLink>
-            <NavLink href={'/products'}>Товары</NavLink>
-            <NavLink href={'/categories'}>Категории</NavLink>
-            <NavLink href={'/account'}>Аккаунт</NavLink>
-            <NavLink href={'/cart'}>Корзина ({cartProducts.length})</NavLink>
+            <NavLink href={'/'} isActive={router.pathname === '/'}>Главная</NavLink>
+            <NavLink href={'/products'} isActive={router.pathname === '/products'}>Товары</NavLink>
+            <NavLink href={'/categories'} isActive={router.pathname === '/categories'}>Категории</NavLink>
+            <NavLink href={'/account'} isActive={router.pathname === '/account'}>Аккаунт</NavLink>
+            <NavLink href={'/cart'} isActive={router.pathname === '/cart'}>Корзина ({cartProducts.length})</NavLink>
           </StyledNav>
           <SideIcons>
-            <Link href={'/search'}><SearchIcon /></Link>
+            <Link href={'/search'}><SearchIcon className={router.pathname === '/search' ? "color:#8A2BE2" : "w-6 h-6"} /></Link>
             <NavButton onClick={() => setMobileNavActive(prev => !prev)}>
               <BarsIcon />
             </NavButton>

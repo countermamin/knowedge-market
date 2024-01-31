@@ -9,14 +9,15 @@ import { authOptions } from "@/pages/api/auth/[...nextauth]";
 import { Setting } from "@/models/Setting";
 import AdaptiveFooter from "@/components/Footer";
 
+
 export default function HomePage({ featuredProduct, newProducts, wishedNewProducts }) {
   return (
-    <div>
+    <>
       <Header />
       <Featured product={featuredProduct} />
       <NewProducts products={newProducts} wishedProducts={wishedNewProducts} />
       <AdaptiveFooter />
-    </div>
+    </>
   );
 }
 

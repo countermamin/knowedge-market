@@ -18,15 +18,22 @@ export function CartContextProvider({children}) {
   function addProduct(productId) {
     setCartProducts(prev => [...prev,productId]);
   }
+
   function removeProduct(productId) {
     setCartProducts(prev => {
-      const pos = prev.indexOf(productId);
-      if (pos !== -1) {
-        return prev.filter((value,index) => index !== pos);
+      const indexToRemove = prev.indexOf(productId);
+  
+      if (indexToRemove !== -1) {
+        const updatedCart = [...prev.slice(0, indexToRemove), ...prev.slice(indexToRemove + 1)];
+        ls?.setItem('cart', JSON.stringify(updatedCart));
+        return updatedCart;
       }
+  
       return prev;
     });
   }
+  
+  
   function clearCart() {
     setCartProducts([]);
   }

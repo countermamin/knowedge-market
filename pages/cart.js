@@ -11,6 +11,12 @@ import { RevealWrapper } from "next-reveal";
 import { useSession } from "next-auth/react";
 import AdaptiveFooter from "@/components/Footer";
 
+const FlexBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+`;
+
 const ColumnsWrapper = styled.div`
   display: grid;
   grid-template-columns: 1fr;
@@ -171,7 +177,7 @@ export default function CartPage() {
     );
   }
   return (
-    <>
+    <FlexBox>
       <Header />
       <Center>
         <ColumnsWrapper>
@@ -280,6 +286,6 @@ export default function CartPage() {
         )
       }
 
-    </>
+    </FlexBox>
   );
 }

@@ -33,14 +33,24 @@ const WhiteBox = styled(Link)`
     max-width: 100%;
     max-height: 80px;
   }
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.5s ease-in-out;
+
+  &:hover {
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+  }
 `;
 
 const Title = styled(Link)`
-  font-weight: normal;
-  font-size:.9rem;
-  color:inherit;
-  text-decoration:none;
-  margin:0;
+width: 100%;
+font-weight: normal;
+font-size:.9rem;
+color:inherit;
+text-decoration:none;
+margin:0;
+overflow: hidden;
+text-overflow: ellipsis;
+white-space: nowrap;
 `;
 
 const ProductInfoBox = styled.div`
@@ -48,7 +58,7 @@ const ProductInfoBox = styled.div`
 `;
 
 const PriceRow = styled.div`
-  display: block;
+  display: flex;
   @media screen and (min-width: 768px) {
     display: flex;
     gap: 5px;
