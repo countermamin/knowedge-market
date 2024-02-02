@@ -1,5 +1,4 @@
 import Center from "@/components/Center";
-import Header from "@/components/Header";
 import Title from "@/components/Title";
 import { mongooseConnect } from "@/lib/mongoose";
 import { Product } from "@/models/Product";
@@ -9,7 +8,6 @@ import ProductImages from "@/components/ProductImages";
 import CartIcon from "@/components/icons/CartIcon";
 import FlyingButton from "@/components/FlyingButton";
 import ProductReviews from "@/components/ProductReviews";
-import AdaptiveFooter from "@/components/Footer";
 
 const ColWrapper = styled.div`
   display: grid;
@@ -32,7 +30,6 @@ const Price = styled.span`
 export default function ProductPage({ product }) {
   return (
     <>
-      <Header />
       <Center>
         <ColWrapper>
           <WhiteBox>
@@ -55,7 +52,6 @@ export default function ProductPage({ product }) {
         </ColWrapper>
         <ProductReviews product={product} />
       </Center>
-      <AdaptiveFooter />
     </>
   );
 }

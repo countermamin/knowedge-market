@@ -1,4 +1,3 @@
-import Header from "@/components/Header";
 import Center from "@/components/Center";
 import Input from "@/components/Input";
 import styled from "styled-components";
@@ -7,25 +6,6 @@ import axios from "axios";
 import ProductsGrid from "@/components/ProductsGrid";
 import { debounce } from "lodash";
 import Spinner from "@/components/Spinner";
-import AdaptiveFooter from "@/components/Footer";
-
-const FlexBox = styled.div`
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-`;
-
-const HeaderBox = styled.div`
-  flex: 0 0 auto;
-`;
-
-const MainBox = styled.div`
-  flex: 1 0 auto;
-`;
-
-const FooterBox = styled.div`
-  flex: 0 0 auto;
-`;
 
 const SearchInput = styled(Input)`
   padding: 5px 10px;
@@ -37,7 +17,6 @@ const InputWrapper = styled.div`
   padding: 5px 0;
   background-color: #eeeeeeaa;
 `;
-
 
 export default function SearchPage() {
   const [phrase, setPhrase] = useState("");
@@ -72,32 +51,24 @@ export default function SearchPage() {
       });
   }
   return (
-    <FlexBox>
-      <HeaderBox>
-        <Header />
-      </HeaderBox>
-      <MainBox>
-        <Center>
-          <InputWrapper>
-            <SearchInput
-              autoFocus
-              value={phrase}
-              onChange={(ev) => setPhrase(ev.target.value)}
-              placeholder="Поиск товара..."
-            />
-          </InputWrapper>
-          {!isLoading && phrase !== "" && products.length === 0 && (
-            <h2>Не найдено товаров по запросу &quot;{phrase}&quot;</h2>
-          )}
-          {isLoading && <Spinner fullWidth={true} />}
-          {!isLoading && products.length > 0 && (
-            <ProductsGrid products={products} />
-          )}
-        </Center>
-      </MainBox>
-      <FooterBox>
-        <AdaptiveFooter />
-      </FooterBox>
-    </FlexBox>
+    <>
+      <Center>
+        <InputWrapper>
+          <SearchInput
+            autoFocus
+            value={phrase}
+            onChange={(ev) => setPhrase(ev.target.value)}
+            placeholder="Поиск товара..."
+          />
+        </InputWrapper>
+        {!isLoading && phrase !== "" && products.length === 0 && (
+          <h2>Не найдено товаров по запросу &quot;{phrase}&quot;</h2>
+        )}
+        {isLoading && <Spinner fullWidth={true} />}
+        {!isLoading && products.length > 0 && (
+          <ProductsGrid products={products} />
+        )}
+      </Center>
+    </>
   );
 }

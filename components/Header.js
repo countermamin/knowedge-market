@@ -50,7 +50,7 @@ const NavLink = styled(Link)`
   text-decoration:none;
   min-width:30px;
   padding: 10px 0;
-  transition: all .5s ease;
+  transition: all .3s ease-in-out;
   svg{
     height:20px;
   }

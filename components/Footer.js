@@ -7,12 +7,6 @@ const FooterContainer = styled.footer`
   background-color: #000;
   color: #fff;
   margin-top: 26px;
-  ${props => props.bottom && `
-      position: fixed;
-      bottom: 0;
-      width: 100%;
-  `
-  }
 `;
 
 const FooterInfo = styled.ul`
@@ -23,11 +17,6 @@ const FooterInfo = styled.ul`
   gap: 10px;
   flex-wrap: wrap;
   margin-bottom: 0;
-`;
-
-const FooterLink = styled.li`
-  margin: 0 10px;
-  font-size: 16px;
 `;
 
 const StyledText = styled.p`
@@ -43,17 +32,17 @@ const StyledText = styled.p`
 
 const AdaptiveFooter = (props) => {
   return (
-    <FooterContainer bottom={props.bottom}>
+    <FooterContainer>
       <Center>
         <FooterInfo>
-          <div>
+          <li>
             <h4>Контактная информация</h4>
             <StyledText>+7 777 777 77 77</StyledText>
             <StyledText>orzu.maminov9@gmail.com</StyledText>
-          </div>
-          <div>
-            <h4>© 2023 Все права защищены</h4>
-          </div>
+          </li>
+          <li>
+            <h4>© 2024 Все права защищены</h4>
+          </li>
         </FooterInfo>
       </Center>
     </FooterContainer>

@@ -1,4 +1,3 @@
-import Header from "@/components/Header";
 import Center from "@/components/Center";
 import { Category } from "@/models/Category";
 import { Product } from "@/models/Product";
@@ -10,7 +9,6 @@ import { mongooseConnect } from "@/lib/mongoose";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/pages/api/auth/[...nextauth]";
 import { WishedProduct } from "@/models/WishedProduct";
-import AdaptiveFooter from "@/components/Footer";
 
 const CategoryGrid = styled.div`
   display: grid;
@@ -54,7 +52,6 @@ const ShowAllSquare = styled(Link)`
 export default function CategoriesPage({ mainCategories, categoriesProducts, wishedProducts = [] }) {
   return (
     <>
-      <Header />
       <Center>
         {mainCategories.map(cat => (
           <CategoryWrapper key={cat._id}>
@@ -79,7 +76,6 @@ export default function CategoriesPage({ mainCategories, categoriesProducts, wis
           </CategoryWrapper>
         ))}
       </Center>
-      <AdaptiveFooter />
     </>
   );
 }

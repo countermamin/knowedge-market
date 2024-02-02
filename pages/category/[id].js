@@ -101,65 +101,55 @@ export default function CategoryPage({
     });
   }, [filtersValues, sort, filtersChanged]);
   return (
-    <FlexBox>
-      <HeaderBox>
-        <Header />
-      </HeaderBox>
-      <MainBox>
-        <Center>
-          <CategoryHeader>
-            <h1>{category.name}</h1>
-            <FiltersWrapper>
-              {category.properties.map((prop) => (
-                <Filter key={prop.name}>
-                  <span>{prop.name}:</span>
-                  <select
-                    onChange={(ev) =>
-                      handleFilterChange(prop.name, ev.target.value)
-                    }
-                    value={
-                      filtersValues.find((f) => f.name === prop.name).value
-                    }
-                  >
-                    <option value="all">All</option>
-                    {prop.values.map((val) => (
-                      <option key={val} value={val}>
-                        {val}
-                      </option>
-                    ))}
-                  </select>
-                </Filter>
-              ))}
-              <Filter>
-                <span>Сортировка:</span>
+    <>
+      <Center>
+        <CategoryHeader>
+          <h1>{category.name}</h1>
+          <FiltersWrapper>
+            {category.properties.map((prop) => (
+              <Filter key={prop.name}>
+                <span>{prop.name}:</span>
                 <select
-                  value={sort}
-                  onChange={(ev) => {
-                    setSort(ev.target.value);
-                    setFiltersChanged(true);
-                  }}
+                  onChange={(ev) =>
+                    handleFilterChange(prop.name, ev.target.value)
+                  }
+                  value={filtersValues.find((f) => f.name === prop.name).value}
                 >
-                  <option value="price-asc">дешевые</option>
-                  <option value="price-desc">дорогие</option>
-                  <option value="_id-desc">новые</option>
-                  <option value="_id-asc">старые</option>
+                  <option value="all">All</option>
+                  {prop.values.map((val) => (
+                    <option key={val} value={val}>
+                      {val}
+                    </option>
+                  ))}
                 </select>
               </Filter>
-            </FiltersWrapper>
-          </CategoryHeader>
-          {loadingProducts && <Spinner fullWidth />}
-          {!loadingProducts && (
-            <div>
-              {products.length > 0 && <ProductsGrid products={products} />}
-              {products.length === 0 && <div>Sorry, no products found</div>}
-            </div>
-          )}
-        </Center>
-      </MainBox>
-      <FooterBox>
-        <AdaptiveFooter />
-      </FooterBox>
-    </FlexBox>
+            ))}
+            <Filter>
+              <span>Сортировка:</span>
+              <select
+                value={sort}
+                onChange={(ev) => {
+                  setSort(ev.target.value);
+                  setFiltersChanged(true);
+                }}
+              >
+                <option value="price-asc">дешевые</option>
+                <option value="price-desc">дорогие</option>
+                <option value="_id-desc">новые</option>
+                <option value="_id-asc">старые</option>
+              </select>
+            </Filter>
+          </FiltersWrapper>
+        </CategoryHeader>
+        {loadingProducts && <Spinner fullWidth />}
+        {!loadingProducts && (
+          <div>
+            {products.length > 0 && <ProductsGrid products={products} />}
+            {products.length === 0 && <div>Sorry, no products found</div>}
+          </div>
+        )}
+      </Center>
+    </>
   );
 }
 
