@@ -14,7 +14,7 @@ function MyDocument(props) {
         />
         <meta
           property="og:image"
-          content="../public/assets/og.jpeg"
+          content="https://orzu-next-ecommerce.s3.amazonaws.com/1686518863232.jpeg"
         />
         <meta property="og:site_name" content="KnowEdge Market" />
         <meta
