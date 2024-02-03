@@ -36,12 +36,17 @@ const CategoryHeader = styled.div`
 const FiltersWrapper = styled.div`
   display: flex;
   gap: 15px;
+  @media (max-width: 651px) {
+    flex-direction: column; /* Switch back to horizontal layout for larger screens */
+    margin: 8px 0 8px 0;
+  }
 `;
 const Filter = styled.div`
   background-color: #ddd;
   padding: 5px 10px;
   border-radius: 5px;
   display: flex;
+  justify-content: space-between;
   gap: 5px;
   color: #444;
   select {
@@ -112,7 +117,7 @@ export default function CategoryPage({
                   }
                   value={filtersValues.find((f) => f.name === prop.name).value}
                 >
-                  <option value="all">All</option>
+                  <option value="all">Все</option>
                   {prop.values.map((val) => (
                     <option key={val} value={val}>
                       {val}
@@ -142,7 +147,7 @@ export default function CategoryPage({
         {!loadingProducts && (
           <div>
             {products.length > 0 && <ProductsGrid products={products} />}
-            {products.length === 0 && <div>Sorry, no products found</div>}
+            {products.length === 0 && <div>Простите, ничего не найдено...</div>}
           </div>
         )}
       </Center>
