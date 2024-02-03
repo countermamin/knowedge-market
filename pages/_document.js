@@ -20,8 +20,6 @@ function MyDocument(props) {
           property="og:image"
           content="https://orzu-next-ecommerce.s3.amazonaws.com/1686518863232.jpeg"
         />
-        <meta property="og:image:width" content="1200" />
-        <meta property="og:image:height" content="600" />Í
       </Head>
       <body>
         <Main />
