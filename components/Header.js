@@ -9,7 +9,7 @@ import { useRouter } from "next/router";
 
 const StyledHeader = styled.header`
   background-color: #222;
-  position:sticky;
+  position: sticky;
   top:0;
   z-index:10;
 `;

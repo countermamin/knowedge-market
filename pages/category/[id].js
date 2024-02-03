@@ -1,5 +1,3 @@
-import Header from "@/components/Header";
-import Title from "@/components/Title";
 import Center from "@/components/Center";
 import { Category } from "@/models/Category";
 import { Product } from "@/models/Product";
@@ -8,7 +6,6 @@ import styled from "styled-components";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Spinner from "@/components/Spinner";
-import AdaptiveFooter from "@/components/Footer";
 
 const FlexBox = styled.div`
   display: flex;

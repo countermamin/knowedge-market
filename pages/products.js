@@ -10,6 +10,9 @@ import { WishedProduct } from "@/models/WishedProduct";
 export default function ProductsPage({ products, wishedProducts }) {
   return (
     <>
+    <defaultHead>
+        <title>Товары | KnowEdge Market</title>
+      </defaultHead>
       <Center>
         <Title>Все товары</Title>
         <ProductsGrid products={products} wishedProducts={wishedProducts} />

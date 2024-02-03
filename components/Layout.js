@@ -9,10 +9,6 @@ const FlexBox = styled.div`
   min-height: 100vh;
 `;
 
-const HeaderBox = styled.div`
-  flex: 0 0 auto;
-`;
-
 const MainBox = styled.div`
   flex: 1 0 auto;
 `;
@@ -24,9 +20,7 @@ const FooterBox = styled.div`
 function Layout({ children }) {
   return (
     <FlexBox>
-      <HeaderBox>
         <Header />
-      </HeaderBox>
       <MainBox>{children}</MainBox>
       <FooterBox>
         <AdaptiveFooter />
