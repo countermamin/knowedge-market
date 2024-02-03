@@ -97,7 +97,7 @@ export default function Header() {
       <Center>
         <Wrapper>
           <Logo href={'/'}>Ecommerce</Logo>
-          <StyledNav mobileNavActive={mobileNavActive}>
+          <StyledNav onClick={() => setMobileNavActive(prev => !prev)} mobileNavActive={mobileNavActive}>
             <NavLink href={'/'} isActive={router.pathname === '/'}>Главная</NavLink>
             <NavLink href={'/products'} isActive={router.pathname === '/products'}>Товары</NavLink>
             <NavLink href={'/categories'} isActive={router.pathname === '/categories'}>Категории</NavLink>

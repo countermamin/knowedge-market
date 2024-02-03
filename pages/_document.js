@@ -5,21 +5,23 @@ function MyDocument(props) {
   return (
     <Html>
       <Head>
+        <meta property="og:url" content="site.ru" />  
         <meta property="og:type" content="website" />
-        <meta property="og:site_name" content="KnowEdge Market" />
-        <meta property="og:url" content="https://new-ecomm-front.vercel.app/" />
+        <meta property="og:locale" content="ru_RU" />
         <meta
           property="og:title"
           content="Онлайн магазин электронных товаров"
         />
         <meta
-          property="og:description"
-          content="Онлайн магазин электронных товаров - это лучшее место для покупки смартфонов, ноутбуков, планшетов, наушников, колонок и других электронных устройств по выгодным ценам. У нас есть широкий выбор брендов и моделей, быстрая доставка и гарантия качества. Закажи сейчас и получи скидку 10% на первый заказ!"
-        />
-        <meta
           property="og:image"
           content="https://orzu-next-ecommerce.s3.amazonaws.com/1686518863232.jpeg"
         />
+        <meta property="og:site_name" content="KnowEdge Market" />
+        <meta
+          property="og:description"
+          content="Онлайн магазин электронных товаров - это лучшее место для покупки смартфонов, ноутбуков, планшетов, наушников, колонок и других электронных устройств по выгодным ценам. У нас есть широкий выбор брендов и моделей, быстрая доставка и гарантия качества. Закажи сейчас и получи скидку 10% на первый заказ!"
+        />
+        
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="600" />
       </Head>
