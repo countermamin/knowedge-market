@@ -87,6 +87,9 @@ const WishlistButton = styled.button`
   right:0;
   background:transparent;
   cursor: pointer;
+  &:hover {
+    color: red;
+  }
   ${props => props.wished ? `
     color:red;
   ` : `
