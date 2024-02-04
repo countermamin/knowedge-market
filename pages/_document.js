@@ -3,7 +3,7 @@ import { ServerStyleSheet } from "styled-components";
 
 function MyDocument(props) {
   return (
-    <Html>
+    <Html lang="ru">
       <Head>
         <meta property="og:url" content="site.ru" />  
         <meta property="og:type" content="website" />

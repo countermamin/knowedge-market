@@ -1,3 +1,4 @@
+'use client';
 import styled from "styled-components";
 import Center from "@/components/Center";
 import Button from "@/components/Button";
@@ -166,6 +167,9 @@ export default function CartPage() {
   if (isSuccess) {
     return (
       <>
+      <defaultHead>
+        <title>Корзина | KnowEdge Market</title>
+      </defaultHead>
         <Center>
           <ColumnsWrapper>
             <Box>
@@ -179,6 +183,7 @@ export default function CartPage() {
   }
   return (
     <>
+    <title>Корзина | KnowEdge Market</title>
       <Center>
         <ColumnsWrapper>
           <RevealWrapper delay={0}>

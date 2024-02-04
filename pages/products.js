@@ -1,3 +1,4 @@
+'use client';
 import Center from "@/components/Center";
 import { mongooseConnect } from "@/lib/mongoose";
 import { Product } from "@/models/Product";

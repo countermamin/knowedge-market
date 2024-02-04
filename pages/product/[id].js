@@ -1,3 +1,4 @@
+'use client';
 import Center from "@/components/Center";
 import Title from "@/components/Title";
 import { mongooseConnect } from "@/lib/mongoose";
@@ -30,6 +31,9 @@ const Price = styled.span`
 export default function ProductPage({ product }) {
   return (
     <>
+    <defaultHead>
+        <title>{product.title} | KnowEdge Market</title>
+      </defaultHead>
       <Center>
         <ColWrapper>
           <WhiteBox>

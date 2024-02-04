@@ -46,7 +46,7 @@ const StyledNav = styled.nav`
 `;
 const NavLink = styled(Link)`
   display: block;
-  color: ${props => props.isActive ? '#0D3D29' : '#aaa'};
+  color: ${props => props.isActive ? '#ffffff' : '#aaa'};
   text-decoration:none;
   min-width:30px;
   padding: 10px 0;
@@ -58,7 +58,7 @@ const NavLink = styled(Link)`
     padding:0;
   }
   &:hover {
-    color: #0D3D29;
+    color: #ffffff;
   }
 `;
 const NavButton = styled.button`
@@ -99,8 +99,8 @@ export default function Header() {
           <Logo href={'/'}>Ecommerce</Logo>
           <StyledNav onClick={() => setMobileNavActive(prev => !prev)} mobileNavActive={mobileNavActive}>
             <NavLink href={'/'} isActive={router.pathname === '/'}>Главная</NavLink>
-            <NavLink href={'/products'} isActive={router.pathname === '/products'}>Товары</NavLink>
-            <NavLink href={'/categories'} isActive={router.pathname === '/categories'}>Категории</NavLink>
+            <NavLink href={'/products'} isActive={router.pathname.includes('product')}>Товары</NavLink>
+            <NavLink href={'/categories'} isActive={router.pathname.includes('categor')}>Категории</NavLink>
             <NavLink href={'/account'} isActive={router.pathname === '/account'}>Аккаунт</NavLink>
             <NavLink href={'/cart'} isActive={router.pathname === '/cart'}>Корзина ({cartProducts.length})</NavLink>
           </StyledNav>

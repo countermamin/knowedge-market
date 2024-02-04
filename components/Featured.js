@@ -98,7 +98,6 @@ export default function Featured({product}) {
           <ImgColumn>
             <RevealWrapper delay={0}>
               <CenterImg>
-                {/* <img className={'main'} src={product.images?.[0]} alt="img"/> */}
                 <Image className={'main'} src={product.images?.[0]} alt="img" width={300} height={200} />
               </CenterImg>
             </RevealWrapper>

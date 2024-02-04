@@ -1,3 +1,4 @@
+'use client';
 import Center from "@/components/Center";
 import Input from "@/components/Input";
 import styled from "styled-components";
@@ -52,6 +53,9 @@ export default function SearchPage() {
   }
   return (
     <>
+    <defaultHead>
+        <title>Поиск | KnowEdge Market</title>
+      </defaultHead>
       <Center>
         <InputWrapper>
           <SearchInput

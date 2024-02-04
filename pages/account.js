@@ -1,3 +1,4 @@
+'use client';
 import Center from "@/components/Center";
 import { signIn, signOut, useSession } from "next-auth/react";
 import Button from "@/components/Button";
@@ -114,6 +115,9 @@ export default function AccountPage() {
   }
   return (
     <>
+    <defaultHead>
+        <title>Аккаунт | KnowEdge Market</title>
+      </defaultHead>
       <Center>
         <ColsWrapper>
           <div>

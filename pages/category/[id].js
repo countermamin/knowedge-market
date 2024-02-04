@@ -1,3 +1,4 @@
+'use client';
 import Center from "@/components/Center";
 import { Category } from "@/models/Category";
 import { Product } from "@/models/Product";
@@ -104,6 +105,9 @@ export default function CategoryPage({
   }, [filtersValues, sort, filtersChanged]);
   return (
     <>
+    <defaultHead>
+        <title>{category.name} | KnowEdge Market</title>
+      </defaultHead>
       <Center>
         <CategoryHeader>
           <h1>{category.name}</h1>

@@ -1,3 +1,4 @@
+'use client';
 import Center from "@/components/Center";
 import { Category } from "@/models/Category";
 import { Product } from "@/models/Product";
@@ -52,6 +53,9 @@ const ShowAllSquare = styled(Link)`
 export default function CategoriesPage({ mainCategories, categoriesProducts, wishedProducts = [] }) {
   return (
     <>
+    <defaultHead>
+        <title>Категории | KnowEdge Market</title>
+      </defaultHead>
       <Center>
         {mainCategories.map(cat => (
           <CategoryWrapper key={cat._id}>
