@@ -4,6 +4,7 @@ import ButtonLink from "@/components/ButtonLink";
 import CartIcon from "@/components/icons/CartIcon";
 import FlyingButton from "@/components/FlyingButton";
 import {RevealWrapper} from 'next-reveal';
+import Image from 'next/image';
 
 const Bg = styled.div`
   background-color: #222;
@@ -97,7 +98,8 @@ export default function Featured({product}) {
           <ImgColumn>
             <RevealWrapper delay={0}>
               <CenterImg>
-                <img className={'main'} src={product.images?.[0]} alt="img"/>
+                {/* <img className={'main'} src={product.images?.[0]} alt="img"/> */}
+                <Image className={'main'} src={product.images?.[0]} alt="img" width={300} height={200} />
               </CenterImg>
             </RevealWrapper>
           </ImgColumn>

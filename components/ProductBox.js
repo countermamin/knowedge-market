@@ -1,15 +1,13 @@
 import styled from "styled-components";
-import Button, { ButtonStyle } from "@/components/Button";
 import CartIcon from "@/components/icons/CartIcon";
 import Link from "next/link";
-import { useContext, useEffect, useState } from "react";
-import { CartContext } from "@/components/CartContext";
-import { primary } from "@/lib/colors";
+import { useState } from "react";
 import FlyingButton from "@/components/FlyingButton";
 import HeartOutlineIcon from "@/components/icons/HeartOutlineIcon";
 import HeartSolidIcon from "@/components/icons/HeartSolidIcon";
 import axios from "axios";
 import { useSession } from "next-auth/react";
+import Image from 'next/image';
 
 const ProductWrapper = styled.div`
   button{
@@ -129,7 +127,7 @@ export default function ProductBox({
           <WishlistButton wished={isWished} onClick={addToWishlist}>
             {isWished ? <HeartSolidIcon /> : <HeartOutlineIcon />}
           </WishlistButton>
-          <img src={images?.[0]} alt="img" />
+          <Image src={images?.[0]} width={200} height={200} alt="img" layout="responsive" style={{maxHeight: 80, maxWidth:140}} />
         </div>
       </WhiteBox>
       <ProductInfoBox>

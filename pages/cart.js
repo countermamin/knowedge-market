@@ -8,6 +8,7 @@ import Table from "@/components/Table";
 import Input from "@/components/Input";
 import { RevealWrapper } from "next-reveal";
 import { useSession } from "next-auth/react";
+import Image from "next/image";
 
 const ColumnsWrapper = styled.div`
   display: grid;
@@ -31,6 +32,13 @@ const ColumnsWrapper = styled.div`
   }
   tr.total td {
     font-weight: bold;
+  }
+  .countButts {
+    display: flex;
+    text-align: center;
+    @media screen and (max-width: 550px) {
+      display: inline-block;
+    }
   }
 `;
 
@@ -56,26 +64,20 @@ const ProductImageBox = styled.div`
   align-items: center;
   justify-content: center;
   border-radius: 10px;
-  img {
-    max-width: 60px;
-    max-height: 60px;
-  }
   @media screen and (min-width: 768px) {
     padding: 10px;
     width: 100px;
     height: 100px;
-    img {
-      max-width: 80px;
-      max-height: 80px;
-    }
   }
 `;
 
 const QuantityLabel = styled.span`
   padding: 0 15px;
-  display: block;
+  display: flex;
+  align-items: center;
   @media screen and (min-width: 768px) {
-    display: inline-block;
+    display: flex;
+    align-items: center;
     padding: 0 6px;
   }
 `;
@@ -194,30 +196,39 @@ export default function CartPage() {
                   </thead>
                   <tbody>
                     {products.map((product) => (
-                      <tr key={product._id}>
+                      <tr key={product._id} className="countButtWrapper">
                         <ProductInfoCell>
                           <ProductImageBox>
-                            <img src={product.images[0]} alt="img" />
+                            <Image
+                              src={product.images?.[0]}
+                              width={200}
+                              height={200}
+                              alt="img"
+                              layout="responsive"
+                              style={{ maxHeight: 80, maxWidth: 140 }}
+                            />
                           </ProductImageBox>
                           {product.title}
                         </ProductInfoCell>
                         <td>
-                          <Button
-                            onClick={() => lessOfThisProduct(product._id)}
-                          >
-                            -
-                          </Button>
-                          <QuantityLabel>
-                            {
-                              cartProducts.filter((id) => id === product._id)
-                                .length
-                            }
-                          </QuantityLabel>
-                          <Button
-                            onClick={() => moreOfThisProduct(product._id)}
-                          >
-                            +
-                          </Button>
+                          <div className="countButts">
+                            <Button
+                              onClick={() => lessOfThisProduct(product._id)}
+                            >
+                              -
+                            </Button>
+                            <QuantityLabel>
+                              {
+                                cartProducts.filter((id) => id === product._id)
+                                  .length
+                              }
+                            </QuantityLabel>
+                            <Button
+                              onClick={() => moreOfThisProduct(product._id)}
+                            >
+                              +
+                            </Button>
+                          </div>
                         </td>
                         <td>
                           {(

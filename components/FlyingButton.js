@@ -3,6 +3,7 @@ import {ButtonStyle} from "@/components/Button";
 import {primary} from "@/lib/colors";
 import {CartContext} from "@/components/CartContext";
 import {useContext, useEffect, useRef, useState} from "react";
+import Image from 'next/image';
 
 const FlyingButtonWrapper = styled.div`
   button{
@@ -35,7 +36,7 @@ const FlyingButtonWrapper = styled.div`
     @keyframes fly {
       100% {
         top: 0;
-        left: 85%; 
+        left: 65%; 
         opacity: 0;
         display: none;
         max-width: 50px;
@@ -43,7 +44,7 @@ const FlyingButtonWrapper = styled.div`
       }
     }
   }
-  @media (max-width: 1000px) {
+  @media (max-width: 768px) {
     @keyframes fly {
       100% {
         top: 0;
@@ -95,7 +96,7 @@ export default function FlyingButton(props) {
         white={props.white}
         main={props.main}
         onClick={() => addProduct(props._id)}>
-        <img src={props.src} alt="img" ref={imgRef} />
+        <Image ref={imgRef} src={props.src} width={100} height={100} alt="img" layout="responsive" style={{maxHeight: 100, maxWidth:100}} />
         <button onClick={ev => sendImageToCart(ev)} {...props} />
       </FlyingButtonWrapper>
     </>
