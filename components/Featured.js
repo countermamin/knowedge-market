@@ -86,6 +86,8 @@ export default function Featured({ product }) {
                       href={"/product/" + product._id}
                       outline={1}
                       white={1}
+                      prefetch={false} 
+                      shallow={true}
                     >
                       Подробнее
                     </ButtonLink>
