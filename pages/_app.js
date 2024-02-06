@@ -6,15 +6,16 @@ import Layout from "@/components/Layout";
 const GlobalStyles = createGlobalStyle`
   html,
   body{
-    background-color: #eee;
-    padding:0;
-    margin:0;
-    font-family: 'Poppins', sans-serif;
-    height： 100%;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
+      background-color: #eee;
+      padding:0;
+      margin:0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+      height: 100%;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
   }
   hr{
     display: block;
@@ -24,19 +25,19 @@ const GlobalStyles = createGlobalStyle`
 `;
 
 export default function App({
-  Component,
-  pageProps: { session, ...pageProps },
+    Component,
+    pageProps: { session, ...pageProps },
 }) {
-  return (
-    <>
-      <GlobalStyles />
-      <SessionProvider session={session}>
-        <CartContextProvider>
-          <Layout>
-            <Component {...pageProps} />
-          </Layout>
-        </CartContextProvider>
-      </SessionProvider>
-    </>
-  );
+    return (
+        <>
+            <GlobalStyles />
+            <SessionProvider session={session}>
+                <CartContextProvider>
+                    <Layout>
+                        <Component {...pageProps} />
+                    </Layout>
+                </CartContextProvider>
+            </SessionProvider>
+        </>
+    );
 }
