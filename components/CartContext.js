@@ -38,6 +38,7 @@ export function CartContextProvider({ children }) {
 
     function clearCart() {
         setCartProducts([]);
+        ls?.setItem("cart", "");
     }
     return (
         <CartContext.Provider
