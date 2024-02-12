@@ -19,7 +19,10 @@ const StyledTableWrapper = styled.div`
         display: flex;
         text-align: center;
         @media screen and (max-width: 550px) {
-            display: inline-block;
+            display: flex;
+            flex-direction: column;
+            flex-flow: column-reverse;
+            width: 38px;
         }
     }
 `;
