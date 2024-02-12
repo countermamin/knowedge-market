@@ -108,7 +108,6 @@ export default function FlyingButton(props) {
                     width={100}
                     height={100}
                     alt="img"
-                    layout="responsive"
                     style={{ maxHeight: 100, maxWidth: 100 }}
                 />
                 <button onClick={(ev) => sendImageToCart(ev)} {...props} />

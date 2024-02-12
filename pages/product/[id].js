@@ -1,4 +1,3 @@
-"use server";
 import Center from "@/components/Center";
 import Title from "@/components/Title";
 import { mongooseConnect } from "@/lib/mongoose";
