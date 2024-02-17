@@ -1,4 +1,3 @@
-"use client";
 import React, { useContext, useEffect, useState } from "react";
 import Table from "@/components/Table";
 import { CartContext } from "@/components/CartContext";
@@ -37,28 +36,30 @@ function CartProductsContainer({children}) {
 
   return (
     <RevealWrapper delay={0}>
-      <TableWrapper>
-        <Box>
-          <h2>Корзина</h2>
-          {!cartProducts?.length && (
-            <div>Ваша козина пустая</div>
-          )}
-          {!!cartProducts?.length && (
-            <Table>
-              <thead>
-              <tr>
-                <th>Товар</th>
-                <th>Количество</th>
-                <th>Цена</th>
-              </tr>
-              </thead>
-              <tbody>
-              {children}
-              </tbody>
-            </Table>
-          )}
-        </Box>
-      </TableWrapper>
+      <>
+        <TableWrapper>
+          <Box>
+            <h2>Корзина</h2>
+            {!cartProducts?.length && (
+              <div>Ваша козина пустая</div>
+            )}
+            {!!cartProducts?.length && (
+              <Table>
+                <thead>
+                <tr>
+                  <th>Товар</th>
+                  <th>Количество</th>
+                  <th>Цена</th>
+                </tr>
+                </thead>
+                <tbody>
+                {children}
+                </tbody>
+              </Table>
+            )}
+          </Box>
+        </TableWrapper>
+      </>
     </RevealWrapper>
   );
 }

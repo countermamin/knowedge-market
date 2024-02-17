@@ -13,6 +13,8 @@ const StyledInput = styled.input`
 
 const MemoizedStyledInput = memo(StyledInput);
 
-export default function Input(props) {
+function Input(props) {
     return <MemoizedStyledInput {...props} />;
 }
+
+export default Input;

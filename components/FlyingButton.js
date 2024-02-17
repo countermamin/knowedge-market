@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { ButtonStyle } from "@/components/Button";
 import { primary } from "@/lib/colors";
 import { CartContext } from "@/components/CartContext";
-import { memo, useContext, useEffect, useRef, useState } from "react";
+import { memo, useContext, useEffect, useRef } from "react";
 import Image from "next/image";
 
 const FlyingButtonWrapper = styled.div`
@@ -75,7 +75,7 @@ const FlyingButtonWrapper = styled.div`
 
 export default function FlyingButton(props) {
     const { addProduct } = useContext(CartContext);
-    const imgRef = useRef();
+    const imgRef = useRef(null);
     function sendImageToCart(ev) {
         imgRef.current.style.display = "inline-block";
         imgRef.current.style.left = ev.clientX - 50 + "px";
